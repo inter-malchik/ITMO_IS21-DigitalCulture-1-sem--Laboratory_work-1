@@ -3,28 +3,28 @@
 #include <stdbool.h>
 
 void helping() {
-    printf("‚ы позвали на помощь!\n\n");
-    printf("утилита WordCount\n\n");
-    printf("утилита WordCount подсчитывает количество строк, слов и байт длЯ указанного файла.\n");
-    printf("Ќазвание файла и опции передаютсЯ через аргументы командной строки в следующем формате:\n\n");
+    printf("Р’С‹ РїРѕР·РІР°Р»Рё РЅР° РїРѕРјРѕС‰СЊ!\n\n");
+    printf("СѓС‚РёР»РёС‚Р° WordCount\n\n");
+    printf("СѓС‚РёР»РёС‚Р° WordCount РїРѕРґСЃС‡РёС‚С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє, СЃР»РѕРІ Рё Р±Р°Р№С‚ РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ С„Р°Р№Р»Р°.\n");
+    printf("РќР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° Рё РѕРїС†РёРё РїРµСЂРµРґР°СЋС‚СЃСЏ С‡РµСЂРµР· Р°СЂРіСѓРјРµРЅС‚С‹ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё РІ СЃР»РµРґСѓСЋС‰РµРј С„РѕСЂРјР°С‚Рµ:\n\n");
     printf("WordCount.exe [OPTION] filename\n\n");
-    printf("где\tfilename - название рассматриваемого файла (файл должен существовать)\nа\t[OPTION] - это опции\n\n");
-    printf("поддерживаемые опции:\n");
-    printf("-h, --help\tвызов помощи (только если это единственный аргумент)\n");
-    printf("-l, --lines\tвывод количества строк в файле\n");
-    printf("-c, --bytes\tвывод размера файла в байтах\n");
-    printf("-w, --words\tвывод количества слов в файле");
-    printf("\n\nпри выборе нескольких опций, результат выводитсЯ в порЯдке\nbytes -> lines -> words");
+    printf("РіРґРµ\tfilename - РЅР°Р·РІР°РЅРёРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ С„Р°Р№Р»Р° (С„Р°Р№Р» РґРѕР»Р¶РµРЅ СЃСѓС‰РµСЃС‚РІРѕРІР°С‚СЊ)\nР°\t[OPTION] - СЌС‚Рѕ РѕРїС†РёРё\n\n");
+    printf("РїРѕРґРґРµСЂР¶РёРІР°РµРјС‹Рµ РѕРїС†РёРё:\n");
+    printf("-h, --help\tРІС‹Р·РѕРІ РїРѕРјРѕС‰Рё (С‚РѕР»СЊРєРѕ РµСЃР»Рё СЌС‚Рѕ РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ Р°СЂРіСѓРјРµРЅС‚)\n");
+    printf("-l, --lines\tРІС‹РІРѕРґ РєРѕР»РёС‡РµСЃС‚РІР° СЃС‚СЂРѕРє РІ С„Р°Р№Р»Рµ\n");
+    printf("-c, --bytes\tРІС‹РІРѕРґ СЂР°Р·РјРµСЂР° С„Р°Р№Р»Р° РІ Р±Р°Р№С‚Р°С…\n");
+    printf("-w, --words\tРІС‹РІРѕРґ РєРѕР»РёС‡РµСЃС‚РІР° СЃР»РѕРІ РІ С„Р°Р№Р»Рµ");
+    printf("\n\nРїСЂРё РІС‹Р±РѕСЂРµ РЅРµСЃРєРѕР»СЊРєРёС… РѕРїС†РёР№, СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹РІРѕРґРёС‚СЃСЏ РІ РїРѕСЂСЏРґРєРµ\nbytes -> lines -> words");
 }
 
-bool check_file_accuracy(char *name) { /* функциЯ проверки назв. файла на корректность */
+bool check_file_accuracy(char *name) { /* С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё РЅР°Р·РІ. С„Р°Р№Р»Р° РЅР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ */
     if (strchr(name, 46) > 0) {
         return true;
     }
     return false;
 }
 
-bool check_argument(char *argument, char *option) { /* функциЯ проверки соответствиЯ аргумента командной строки */
+bool check_argument(char *argument, char *option) { /* С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё СЃРѕРѕС‚РІРµС‚СЃС‚РІРёСЏ Р°СЂРіСѓРјРµРЅС‚Р° РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё */
     if (strcmp(argument, option) == 0) {
         return true;
     }
@@ -34,21 +34,21 @@ bool check_argument(char *argument, char *option) { /* функциЯ проверки соответс
 int main(int argv, char **argc) {
     char *filename = argc[argv - 1];
     if (argv <= 1) {
-        printf("\aвы не ввели аргументов");
+        printf("\aРІС‹ РЅРµ РІРІРµР»Рё Р°СЂРіСѓРјРµРЅС‚РѕРІ");
         return 0;
     } else if (argv == 2) {
         if ((check_argument(argc[1], "--help")) || (check_argument(argc[1], "-h"))) {
             helping();
             return 0;
         } else if (check_file_accuracy(filename)) {
-            printf("\aвы не ввели аргументов длЯ файла %s", filename);
+            printf("\aРІС‹ РЅРµ РІРІРµР»Рё Р°СЂРіСѓРјРµРЅС‚РѕРІ РґР»СЏ С„Р°Р№Р»Р° %s", filename);
             return 0;
         } else {
-            printf("\aневерный ввод");
+            printf("\aРЅРµРІРµСЂРЅС‹Р№ РІРІРѕРґ");
             return 0;
         }
     } else {
-        printf("файл %s\n", filename);
+        printf("С„Р°Р№Р» %s\n", filename);
         if (check_file_accuracy(filename)) {
             bool byte = false;
             bool line = false;
@@ -62,13 +62,13 @@ int main(int argv, char **argc) {
                 FILE *file;
                 file = fopen(filename, "r");
                 if (file == NULL) {
-                    printf("\aфайла не существует!");
+                    printf("\aС„Р°Р№Р»Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!");
                     return 0;
                 }
                 if (byte) {
                     fseek(file, 0L, SEEK_END);
                     unsigned long int size_of_file = ftell(file);
-                    printf("размер файла: %lu байт\n", size_of_file);
+                    printf("СЂР°Р·РјРµСЂ С„Р°Р№Р»Р°:: %lu Р±Р°Р№С‚\n", size_of_file);
                     rewind(file);
                 }
                 if ((line) || (word)) {
@@ -90,19 +90,19 @@ int main(int argv, char **argc) {
                     if ((c != 10) && (c != 32)) {
                         amount_of_words = amount_of_words + 1;
                     }
-                    if (line) { printf("строк в файле: %d\n", amount_of_lines); }
-                    if (word) { printf("слов в файле: %ld\n", amount_of_words); }
+                    if (line) { printf("СЃС‚СЂРѕРє РІ С„Р°Р№Р»Рµ: %d\n", amount_of_lines); }
+                    if (word) { printf("СЃР»РѕРІ РІ С„Р°Р№Р»Рµ: %ld\n", amount_of_words); }
 
                 }
                 fclose(file);
             } else {
-                printf("\aвы не ввели корректных аргументов длЯ файла %s", filename);
+                printf("\aРІС‹ РЅРµ РІРІРµР»Рё РєРѕСЂСЂРµРєС‚РЅС‹С… Р°СЂРіСѓРјРµРЅС‚РѕРІ РґР»СЏ С„Р°Р№Р»Р° %s", filename);
                 return 0;
             }
 
 
         } else {
-            printf("\aформат введенного файла некорректен!");
+            printf("\aС„РѕСЂРјР°С‚ РІРІРµРґРµРЅРЅРѕРіРѕ С„Р°Р№Р»Р° РЅРµРєРѕСЂСЂРµРєС‚РµРЅ!");
             return 0;
         }
     }
