@@ -17,13 +17,6 @@ void helping() {
     printf("\n\nпри выборе нескольких опций, результат выводится в порядке\nbytes -> lines -> words");
 }
 
-bool check_file_accuracy(char *name) { /* функция проверки назв. файла на корректность */
-    if (strchr(name, 46) > 0) {
-        return true;
-    }
-    return false;
-}
-
 bool check_argument(char *argument, char *option) { /* функция проверки соответствия аргумента командной строки */
     if (strcmp(argument, option) == 0) {
         return true;
@@ -40,69 +33,58 @@ int main(int argv, char **argc) {
         if ((check_argument(argc[1], "--help")) || (check_argument(argc[1], "-h"))) {
             helping();
             return 0;
-        } else if (check_file_accuracy(filename)) {
-            printf("\aвы не ввели аргументов для файла %s", filename);
-            return 0;
         } else {
             printf("\aневерный ввод");
             return 0;
         }
     } else {
         printf("файл %s\n", filename);
-        if (check_file_accuracy(filename)) {
-            bool byte = false;
-            bool line = false;
-            bool word = false;
-            for (int i = 1; i < argv; i++) {
-                if ((check_argument(argc[i], "--bytes")) || (check_argument(argc[i], "-c"))) { byte = true; }
-                if ((check_argument(argc[i], "--lines")) || (check_argument(argc[i], "-l"))) { line = true; }
-                if ((check_argument(argc[i], "--words")) || (check_argument(argc[i], "-w"))) { word = true; }
-            }
-            if ((byte) || (line) || (word)) {
-                FILE *file;
-                file = fopen(filename, "r");
-                if (file == NULL) {
-                    printf("\aфайла не существует!");
-                    return 0;
-                }
-                if (byte) {
-                    fseek(file, 0L, SEEK_END);
-                    unsigned long int size_of_file = ftell(file);
-                    printf("размер файла:: %lu байт\n", size_of_file);
-                    rewind(file);
-                }
-                if ((line) || (word)) {
-                    int amount_of_lines = 1;
-                    long int amount_of_words = 0;
-                    int c;
-                    int c_prev = 32;
-                    c = fgetc(file);
-                    while (c != EOF) {
-                        if (c == 10) {
-                            amount_of_lines = amount_of_lines + 1;
-                        }
-                        if (((c == 10) || (c == 32)) && ((c_prev != 10) && (c_prev != 32))) {
-                            amount_of_words = amount_of_words + 1;
-                        }
-                        c_prev = c;
-                        c = fgetc(file);
-                    }
-                    if ((c != 10) && (c != 32)) {
-                        amount_of_words = amount_of_words + 1;
-                    }
-                    if (line) { printf("строк в файле: %d\n", amount_of_lines); }
-                    if (word) { printf("слов в файле: %ld\n", amount_of_words); }
-
-                }
-                fclose(file);
-            } else {
-                printf("\aвы не ввели корректных аргументов для файла %s", filename);
+        bool byte = false;
+        bool line = false;
+        bool word = false;
+        for (int i = 1; i < argv; i++) {
+            if ((check_argument(argc[i], "--bytes")) || (check_argument(argc[i], "-c"))) { byte = true; }
+            if ((check_argument(argc[i], "--lines")) || (check_argument(argc[i], "-l"))) { line = true; }
+            if ((check_argument(argc[i], "--words")) || (check_argument(argc[i], "-w"))) { word = true; }
+        }
+        if ((byte) || (line) || (word)) {
+            FILE *file;
+            file = fopen(filename, "r");
+            if (file == NULL) {
+                printf("\aфайла не существует!");
                 return 0;
             }
-
-
+            if (byte) {
+                fseek(file, 0L, SEEK_END);
+                unsigned long int size_of_file = ftell(file);
+                printf("размер файла:: %lu байт\n", size_of_file);
+                rewind(file);
+            }
+            if ((line) || (word)) {
+                int amount_of_lines = 1;
+                long int amount_of_words = 0;
+                int c;
+                int c_prev = 32;
+                c = fgetc(file);
+                while (c != EOF) {
+                    if (c == 10) {
+                        amount_of_lines = amount_of_lines + 1;
+                    }
+                    if (((c == 10) || (c == 32)) && ((c_prev != 10) && (c_prev != 32))) {
+                        amount_of_words = amount_of_words + 1;
+                    }
+                    c_prev = c;
+                    c = fgetc(file);
+                }
+                if ((c != 10) && (c != 32)) {
+                    amount_of_words = amount_of_words + 1;
+                }
+                if (line) { printf("строк в файле: %d\n", amount_of_lines); }
+                if (word) { printf("слов в файле: %ld\n", amount_of_words); }
+            }
+            fclose(file);
         } else {
-            printf("\aформат введенного файла некорректен!");
+            printf("\aвы не ввели корректных аргументов для файла %s", filename);
             return 0;
         }
     }
